@@ -1,0 +1,58 @@
+# ---------------------------------------------------------------------------
+#
+# Con Dockerfile preparamos una imagen.
+#
+# (que al ejecutarse, será un contenedor)
+#
+# ---------------------------------------------------------------------------
+#
+# Comando para crear la imagen a partir de un Dockerfile
+#
+#     $ docker build --tag  nodecito_img --file Dockerfile.nodecito .
+#
+# Borrar imágenes (para cuando fallen cosas):
+#
+#   $ docker images
+#   $ docker rmi nodecito_img // borrar imagen por pruebas
+# ---------------------------------------------------------------------------
+
+# -----------------------------------------------------------
+# Nos basamos en esta imagen. Si no la tenemos localmente,
+# se bajará (hará pull).
+#
+FROM  node:latest
+
+# copiamos ficheros dentro del contenedor
+COPY src/nodejs/mainTestMarieta.js /home/node
+COPY src/nodejs/mainServer.js /home/node
+COPY src/nodejs/package.json /home/node
+# directorio de trabajo
+WORKDIR /home/node
+# instalar dependencias
+RUN npm install
+
+RUN apt update
+
+RUN apt install 
+
+# aviso que usaremos este puerto
+EXPOSE 8080
+
+
+#CMD ["node", "mainTest.js"] # para cuando fuera un servidor residente
+
+#CMD ["/bin/bash"]
+
+CMD ["node", "mainServer.js"] 
+
+
+#
+# podemos arrancar un contenedor de esta imagen (si se llama p.ej. nodecito_img) con:
+#
+#     docker run -p 8080:8080 --interactive --detach --name kknode   nodecito_img
+#
+# Luego entrar para probar
+#       
+#       docker exec -it kknode bash
+#       
+

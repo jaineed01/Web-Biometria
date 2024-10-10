@@ -1,0 +1,46 @@
+# ---------------------------------------------------------------------------
+#
+# Con Dockerfile preparamos una imagen.
+# (que al ejecutarse, será un contenedor)
+#
+# ---------------------------------------------------------------------------
+#
+# Comando para crear la imagen a partir de un Dockerfile
+#
+#   $ docker build --tag  marieta_img --file Dockerfile.mariadb .
+#
+# Borrar imágenes (para cuando fallen cosas):
+#   $ docker images
+#   $ docker rmi marieat_img // borrar imagen por pruebas#
+#
+# ---------------------------------------------------------------------------
+#
+# Nos basamos en esta imagen. Si no la tenemos localmente,
+# se bajará (hará pull).
+#
+FROM  mariadb:latest
+
+# copiamos el fichero .sql (que crea la base de datos con la tabla de prueba)
+# dentro del contenedor
+# Si lo ponemos en ese directorio, ejecutará el script
+# la primera vez que se arranque el contenedor a partir de esta imagen
+COPY src/sql/crearYPoblar.sql /docker-entrypoint-initdb.d/
+
+#
+# podemos arrancar un contenedor de esta imagen (si se llama p.ej. marieta_img) con:
+#
+#     run -p 3306:3306 --detach --name kkmari  // nomobre del contenedor
+#          --env MARIADB_ROOT_PASSWORD=1234 marieta_img
+#
+# Luego entrar para probar
+#       
+#       docker exec -it kkmari bash
+#       
+#  Y ya dentro usar la consola mariadb para ver que se ha creado la
+#   BD y la tabla de prueba
+#       
+#  $ mariadb -u root -p
+#
+#            > USE PROBANDOKV;
+#            > SHOW TABLES;
+#            > select * from key_value;

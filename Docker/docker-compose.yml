@@ -1,0 +1,36 @@
+version: "3"
+services: 
+  nodecito:
+    container_name: nodecito
+    build: 
+      context: .
+      dockerfile: Dockerfile.nodecito
+    tty: true
+    ports:
+      - "8080:8080"
+    depends_on: 
+      - marieta
+    networks:
+      - redecita
+
+  marieta:
+    container_name: marieta
+    build: 
+      context: .
+      dockerfile: Dockerfile.marieta
+    ports:
+      - "3306:3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: "1234"
+    volumes:
+      - maria-data:/var/lib/mysql
+    networks:
+      - redecita
+
+networks:
+  redecita:
+    driver: bridge
+
+volumes:
+  maria-data:
+    driver: local

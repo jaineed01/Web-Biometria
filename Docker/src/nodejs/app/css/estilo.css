@@ -1,0 +1,68 @@
+/* Reset básico para quitar márgenes y padding predeterminados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para el contenedor principal */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Estilos para el título principal */
+h1 {
+    color: #0d6efd;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Estilos para los contenedores de datos */
+.data-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.data-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-item h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.data-item p {
+    font-size: 1.5rem;
+    color: #555;
+}
+
+/* Estilo para el footer */
+footer {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
